@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>AgroBot 🤖</h2>
+
+<input id="userMsg" placeholder="Ask about crops...">
+<button onclick="chat()">Send</button>
+
+<p id="botReply"></p>
+
+<script>
+function chat(){
+ let msg = document.getElementById("userMsg").value.toLowerCase();
+ let reply="";
+
+ if(msg.includes("disease")) reply="Upload leaf image to detect disease.";
+ else if(msg.includes("remedy")) reply="Proper spraying helps.";
+ else reply="I am here to help farmers!";
+
+ document.getElementById("botReply").innerText=reply;
+}
+</script>
+
+{% endblock %}

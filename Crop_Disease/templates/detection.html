@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Upload Crop Leaf Image</h2>
+
+<form id="uploadForm">
+<input type="file" name="image" required>
+<button>Detect</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+document.getElementById("uploadForm").onsubmit = async (e)=>{
+ e.preventDefault();
+
+ let formData = new FormData(e.target);
+
+ let res = await fetch("/predict",{
+   method:"POST",
+   body:formData
+ });
+
+ let data = await res.json();
+
+ document.getElementById("result").innerHTML =
+   "Disease: "+data.disease+"<br>Confidence: "+data.confidence;
+};
+</script>
+
+{% endblock %}
